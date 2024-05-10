@@ -7,23 +7,10 @@ on:
 env:
   CARGO_TERM_COLOR: always
   ECR_REPOSITORY: tech_challenge_ecr
-  EKS_CLUSTER_NAME: tech-challenge
+  EKS_CLUSTER_NAME: demo
   AWS_REGION: us-east-1
 
-jobs:
-  build:
-    name: Build
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v3
-    - name: Activate nightly
-      run: rustup default nightly
-    - name: Build
-      run: cargo build --verbose
-    - name: Run tests
-      run: cargo test --verbose
-  
+jobs:  
   deploy:
     name: Deployment
     runs-on: ubuntu-latest
@@ -64,6 +51,7 @@ jobs:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}        
         IMAGE_TAG: ${{ steps.commit.outputs.short }}
       run: |
-        sed -i.bak "s|DOCKER_IMAGE|$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG|g" manifests/deployment.yaml && \
-        kubectl apply -f manifests/deployment.yaml
-        kubectl apply -f manifests/service.yaml
+        kubectl apply -f kustomize/configmap.yaml
+        sed -i.bak "s|DOCKER_IMAGE|$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG|g" kustomize/app-deployment.yaml && \
+        kubectl apply -f kustomize/app-deployment.yaml
+        kubectl apply -f kustomize/app-svc.yaml

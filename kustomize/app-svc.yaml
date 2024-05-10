@@ -3,11 +3,20 @@ kind: Service
 metadata:
   name: rust-app-svc
 spec:
-  type: NodePort
+#   type: NodePort
+#   selector:
+#     app: rust-app
+#   ports:
+#     - protocol: TCP
+#       port: 3000
+#       targetPort: 3000
+#       nodePort: 31200
+
+  type: LoadBalancer
   selector:
-    app: rust-app
+    app: rust-app 
+
   ports:
-    - protocol: TCP
-      port: 3000
+    - port: 3000
       targetPort: 3000
       nodePort: 31200

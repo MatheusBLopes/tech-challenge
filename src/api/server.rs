@@ -45,6 +45,7 @@ pub async fn main() -> Result<(), rocket::Error> {
     let jwt_authentication_adapter: Arc<dyn AuthenticationAdapter + Sync + Send> =
         Arc::new(JWTAuthenticationAdapter::new(config.secret.clone()));
 
+    println!("TESTEEEEEEEEEE");
     println!("Loading environment variables...");
     let usuario_repository: Arc<Mutex<dyn UsuarioGateway + Sync + Send>> = if config.env
         == Env::Test

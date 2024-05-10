@@ -4,8 +4,8 @@ metadata:
   name: app-configmap
 data:
   POSTGRES_DB: postgres
-  POSTGRES_PASSWORD: postgres
-  POSTGRES_USER: postgres
-  DB_URL: postgres://postgres:postgres@db-svc:5432
+  POSTGRES_PASSWORD: mainpassword
+  POSTGRES_USER: mainuser
+  DB_URL: postgresql://mainuser:mainpassword@quizhero.cra60s8i0ksr.us-east-1.rds.amazonaws.com/quizhero
   MOCK_PAGAMENTOS_URL: http://mock-pagamentos-svc:9000/payment/
   API_HOST: rust-app-svc:3000
