@@ -6,6 +6,6 @@ data:
   POSTGRES_DB: postgres
   POSTGRES_PASSWORD: mainpassword
   POSTGRES_USER: mainuser
-  DB_URL: postgresql://mainuser:mainpassword@quizhero.cra60s8i0ksr.us-east-1.rds.amazonaws.com/quizhero
+  DB_URL: postgresql://mainuser:mainpassword@quizhero.cra60s8i0ksr.us-east-1.rds.amazonaws.com:5432/TechChallengeDb
   MOCK_PAGAMENTOS_URL: http://mock-pagamentos-svc:9000/payment/
   API_HOST: rust-app-svc:3000
