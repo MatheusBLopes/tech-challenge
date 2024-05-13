@@ -29,12 +29,13 @@ class PaymentView(APIView):
                 serializer.data["value"]
                 serializer.data["webhook_url"]
                 payment_code = uuid.uuid4()
-
+                
                 timer = threading.Timer(
                     5, approve_payment, args=(serializer, payment_code)
                 )
                 timer.start()
 
+                print("Mock executado com sucesso")
                 return Response({"message": "success", "payment_code": payment_code})
         except Exception as e:
             error_serializer = ErrorSerializer({"message": "failed", "error": str(e)})
