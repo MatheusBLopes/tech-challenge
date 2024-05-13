@@ -15,6 +15,8 @@ def approve_payment(serializer, payment_code):
             url=serializer.data["webhook_url"],
             json={"payment_status": "success", "payment_code": str(payment_code)},
         )
+
+        print(f"Response: {response}")
         response.raise_for_status()
     except Exception as e:
         error_serializer = ErrorSerializer({"message": "failed", "error": str(e)})
@@ -29,6 +31,7 @@ class PaymentView(APIView):
                 serializer.data["value"]
                 serializer.data["webhook_url"]
                 payment_code = uuid.uuid4()
+                print(f"Url do webhook:{serializer.data["webhook_url"]}")
                 
                 timer = threading.Timer(
                     5, approve_payment, args=(serializer, payment_code)

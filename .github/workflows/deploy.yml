@@ -56,8 +56,6 @@ jobs:
         sed -i.bak "s|DOCKER_IMAGE|$ECR_REGISTRY/$ECR_RUST_API_REPOSITORY:latest|g" kustomize/app-deployment.yaml && \
         kubectl apply -f kustomize/app-deployment.yaml
         kubectl apply -f kustomize/app-svc.yaml
-        kubectl apply -f kustomize/app-hpa.yaml
-        kubectl apply -f kustomize/app-metrics.yaml
 
   deploy-django-api:
     name: Deploy Django Api
